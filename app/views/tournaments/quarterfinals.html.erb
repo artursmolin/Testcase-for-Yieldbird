@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="columns is-12 is-vcentered">
+    <div class="column">
+      <h1> Quarterfinals </h1>
+      <% @quarterfinals.each_with_index do |game, index| %>
+        <div class="column">
+          <div class="message">
+            <div class="message-header">
+              <p>Quarterfinal <%= index + 1 %></p>
+            </div>
+            <div class="message-body">
+              <%= game.home_team.name %>
+              <div class="is-divider">
+                <%= game.result %>
+              </div>
+              <%= game.guest_team.name %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="column is-vcentered">
+      <h1> Semifinals </h1>
+      <% @playoff_games.each_with_index do |game, index| %>
+        <div class="column">
+          <div class="message">
+            <div class="message-header">
+              <p>Semifinal <%= index + 1 %></p>
+            </div>
+            <div class="message-body">
+              <%= game[0].name %>
+              <div class="is-divider"></div>
+              <%= game[1].name %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <% if @tournament.matches.where(stage: 'semifinal').empty? %>
+    <%= button_to "Let's play semifinals games!", tournament_bo2_path(@tournament), method: :post, action_name: :create, class: "button is-success" %>
+  <% end %>
+</div>

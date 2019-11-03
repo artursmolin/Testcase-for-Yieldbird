@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="columns is-12 is-vcentered">
+    <div class="column">
+      <h1> Quarterfinals </h1>
+      <div class="column">
+        <% @quarterfinals.each_with_index do |game, index| %>
+          <div class="message">
+            <div class="message-header">
+            <p>Quarterfinal <%= index + 1 %></p>
+            </div>
+            <div class="message-body">
+              <%= game.home_team.name %>
+              <div class="is-divider">
+                <%= game.result %>
+              </div>
+              <%= game.guest_team.name %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="column">
+      <h1> Semifinals </h1>
+      <div class="column">
+        <% @semifinals.each_with_index do |game, index| %>
+          <div class="message">
+            <div class="message-header">
+              <p>Semifinal <%= index + 1 %></p>
+            </div>
+            <div class="message-body">
+              <%= game.home_team.name %>
+              <div class="is-divider">
+                <%= game.result %>
+              </div>
+              <%= game.guest_team.name %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="column is-vcentered">
+      <h1> Final </h1>
+      <div class="column">
+        <div class="message">
+          <div class="message-header">
+            <p>Final</p>
+          </div>
+          <div class="message-body">
+            <%= @playoff_games.first.first.name %>
+            <div class="is-divider"></div>
+            <%= @playoff_games.first.second.name %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if @tournament.matches.where(stage: 'final').empty? %>
+    <%= button_to "Let's play final game!", tournament_bo1_path(@tournament), method: :post, action_name: :create, class: "button is-success" %>
+  <% end %>
+</div>

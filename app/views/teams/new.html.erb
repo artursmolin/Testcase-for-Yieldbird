@@ -1,0 +1,17 @@
+<div class="container has-text-centered">
+  <h1 style="font-size: 24px">Enter teams names</h1>
+  <br>
+  <%= form_tag("/tournaments/#{@tournament.id}/teams", method: :post) do %>
+    <% 4.times do %>
+      <div class="columns">
+        <% 4.times do %>
+          <div class="column">
+            <%= label_tag 'Team Name' %>
+            <%= text_field_tag "teams[][name]", nil, class: :input, required: true %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <%= submit_tag "Submit", class: 'button is-success' %>
+  <% end %>
+</div>

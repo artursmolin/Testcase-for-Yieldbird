@@ -1,0 +1,20 @@
+<div class="container">
+  <h1> Quarterfinals </h1>
+  <% @playoff_games.each_with_index do |game, index| %>
+    <div class="column is-3">
+    <div class="message">
+      <div class="message-header">
+        <p>Quarterfinal <%= index + 1 %></p>
+      </div>
+      <div class="message-body">
+        <%= game[0].name %>
+        <div class="is-divider"></div>
+        <%= game[1].name %>
+      </div>
+    </div>
+    </div>
+  <% end %>
+  <% if @tournament.matches.where(stage: 'quarterfinal').empty? %>
+    <%= button_to "Let's play quarterfinals games!", tournament_bo4_path(@tournament), method: :post, action_name: :create, class: "button is-success" %>
+  <% end %>
+</div>

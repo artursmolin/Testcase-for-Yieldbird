@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="columns is-vcentered">
+    <div class="column">
+      <h1> Quarterfinals </h1>
+      <div class="column">
+        <% @quarterfinals.each_with_index do |game, index| %>
+          <div class="message">
+            <div class="message-header">
+              <p>Quarterfinal <%= index + 1 %></p>
+            </div>
+            <div class="message-body">
+              <%= game.home_team.name %>
+              <div class="is-divider">
+                <%= game.result %>
+              </div>
+              <%= game.guest_team.name %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="column">
+      <h1> Semifinals </h1>
+      <div class="column">
+        <% @semifinals.each_with_index do |game, index| %>
+          <div class="message">
+            <div class="message-header">
+              <p>Semifinal <%= index + 1 %></p>
+            </div>
+            <div class="message-body">
+              <%= game.home_team.name %>
+              <div class="is-divider">
+                <%= game.result %>
+              </div>
+              <%= game.guest_team.name %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="column is-vcentered">
+      <h1> Final </h1>
+      <div class="column">
+        <div class="message">
+          <div class="message-header">
+            <p>Final</p>
+          </div>
+          <div class="message-body">
+            <%= @final.home_team.name %>
+            <div class="is-divider">
+              <%= @final.result %>
+            </div>
+            <%= @final.guest_team.name %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="column is-centered">
+      <h1> Winner </h1>
+      <div class="column">
+        <div class="message">
+          <div class="message-header">
+            <p>Winner</p>
+          </div>
+          <div class="message-body">
+            <b><%= @winner.name %></b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= button_to "Delete this tournament?", tournament_path(@tournament), method: :delete, action_name: :destroy, class: "button is-danger" %>
+  <br>
+  <%= button_to "Start new tournament", root_path,method: :get, class: "button is-success" %>
+</div>

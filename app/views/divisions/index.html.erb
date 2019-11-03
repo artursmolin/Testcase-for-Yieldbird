@@ -1,0 +1,32 @@
+<div class="container has-text-centered">
+  <div class="columns">
+  <% @tournament.divisions.each do |division| %>
+      <div class="column is-offset-2">
+        <table class="table">
+          <thead>
+            <tr>
+              <th colspan="2" class="has-text-centered">Division: <%= division.name %></th>
+            </tr>
+            <tr>
+              <th>Team</th>
+              <th>Points</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% division.teams.each do |team| %>
+            <tr>
+              <th><%= team.name %></th>
+              <th><%= team.division_points %></th>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  </div>
+  <% if @round_robined %>
+    <%= link_to 'GO to PLAYOFF!', tournament_playoff_path(@tournament), method: :get, class: 'button is-success' %>
+  <% else %>
+    <%= link_to 'Generate Divisions results', tournament_divisions_round_robin_path(@tournament), method: :post, class: 'button is-success' %>
+  <% end %>
+</div>

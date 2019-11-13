@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :match do
-    result { '5 : 8'}
-    winner { "Team 1" }
+    result { '5 : 8' }
+    winner { 'Team 1' }
     stage { 'division' }
     association :home_team_team_id, factory: :team
     association :guest_team_id, factory: :team

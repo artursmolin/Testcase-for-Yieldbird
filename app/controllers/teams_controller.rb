@@ -6,15 +6,10 @@ class TeamsController < ApplicationController
   def new; end
 
   def create
-    @teams = []
     @divisions = []
     ('A'..'B').each { |name| @divisions.push(@tournament.divisions.create!(name: name)) }
-    teams_params.shuffle.each_with_index do |team_params, index|
-      team = @tournament.teams.build(team_params)
-      team.division_id = index.odd? ? @divisions.first.id : @divisions.second.id
-      @teams.push(team)
-    end
-    if @teams.count.eql?(16) && @teams.each(&:save)
+    result = Teams::Create.new.call(@tournament, @divisions, teams_params)
+    if result.eql?(true)
       redirect_to tournament_divisions_path
     else
       render :new

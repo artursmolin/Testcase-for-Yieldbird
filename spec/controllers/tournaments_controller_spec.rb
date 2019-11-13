@@ -9,7 +9,6 @@ RSpec.describe TournamentsController, type: :controller do
   let(:team) { create(:team, tournament: tournament) }
   let(:division) { create(:division, tournament: tournament) }
 
-
   describe 'GET #new' do
     it 'returns a success response' do
       get :new, params: { name: 'Tournament1' }
